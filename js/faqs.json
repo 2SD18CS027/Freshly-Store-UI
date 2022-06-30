@@ -1,0 +1,19 @@
+{
+  "faqs" : [
+    {
+      "question" : "Can i get the delivery outside of Serviceable Areas?",
+      "answer" : "No. We only serve the areas mentioned in Serviceable Areas. Don't worry, we are expanding our network and soon serve your area.",
+      "id" : 1
+    },
+    {
+      "question" : "Can I cancel my order?",
+      "answer" : "No. Currently there is no way to cancel your order.",
+      "id" : 2
+    },
+    {
+      "question" : "Can I pay cash for my order on delivery?",
+      "answer" : "No. Currently there is no Cash on Delivery option.",
+      "id" : 3
+    }
+  ]
+}

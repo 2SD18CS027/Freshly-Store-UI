@@ -1,0 +1,59 @@
+<head>
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+</head>
+
+<div>
+
+  <center>
+    <div style="">
+      <input id="newPasswordInput" type="text" placeholder="New Password" style="margin-top:30px"/>
+      <br />
+      <div class="button main-color-background" style="height:28px; width:10%; margin-top: 5px;" ng-click="changePassword()">
+        Submit
+      </div>
+    </div>
+  </center>
+
+</div>
+<!-- <center> Items! </center>
+<div class="columns is-variable bd-klmn-columns is-3 is-multiline" style="margin-left:5px; margin-right:5px;">
+  <div class="column is-3" ng-repeat="item in items">
+    <div class="box">
+      <span class="float-left"> {{item.name}} <i class="fa fa-trash-alt"></i> </span>
+      <span ng-if="item.isAvailable" class="float-right" id="itemId-on-{{item.itemId}}"> <i class="fa fa-toggle-on fa-2x main-color cursor-pointer" ng-click="changeItemStatus(item)"></i> </span>
+      <span ng-if="!item.isAvailable" class="float-right" id="itemId-off-{{item.itemId}}"> <i class="fa fa-toggle-off fa-2x danger-color cursor-pointer" ng-click="changeItemStatus(item)"></i> </span>
+      <br style="clear:both;"/>
+      <div class="float-left"> &#8377;{{item.price}} /- &nbsp; <i class="fa fa-pencil-alt main-color cursor-pointer" ng-click="editPrice(item)"></i> </div>
+      
+      <div class="float-right"> <img src="{{item.imageUrl}}" height="30px" width="30px"/> </div>
+      <br style="clear:both;"/>
+
+      <div ng-if="item.category == 'Fresh Vegetables'">
+        <input type="radio" checked="checked" ng-click="changeCatergory(item)"> Vegetables
+        <input type="radio" ng-click="changeCatergory(item)"> Fruits
+      </div>
+      <div ng-if="item.category == 'Fresh Fruits'">
+        <input type="radio" ng-click="changeCatergory(item)"> Vegetables
+        <input type="radio" checked="checked" ng-click="changeCatergory(item)"> Fruits
+      </div>
+
+      <div ng-if="item.uom == 'Piece'">
+        <input type="radio" checked="checked" ng-click="changeUom(item)"> Piece
+        <input type="radio" ng-click="changeUom(item)"> Kg
+      </div>
+      <div ng-if="item.uom == 'Kg'">
+        <input type="radio" ng-click="changeUom(item)"> Piece
+        <input type="radio" checked="checked" ng-click="changeUom(item)"> Kg
+      </div>
+
+      <input id="imageUpload-{{item.itemId}}" type="file" value="change image" accept="image/*" style="margin-top:5px;"/>
+      <span class="tag is-success cursor-pointer" ng-click="changeItemImage(item)">Upload</span>
+    </div>
+  </div>
+</div> -->
+
+<!-- <a class="float" ng-click="addItem()">
+  <i class="fa fa-plus my-float"></i>
+</a> -->

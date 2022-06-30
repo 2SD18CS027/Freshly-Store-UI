@@ -1,0 +1,15 @@
+{
+  "name": "the-freshly-store",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "live-server"
+  },
+  "author": "Varun Parwatikar",
+  "license": "ISC",
+  "dependencies": {
+    "ui-select": "^0.19.8"
+  }
+}

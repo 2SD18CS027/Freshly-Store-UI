@@ -1,0 +1,32 @@
+<head>
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+</head>
+
+<div style="margin-left:10px; margin-right:10px;">
+  <center><h1>FAQs</h1></center>
+
+  <div class="columns is-variable bd-klmn-columns is-multiline"
+    style="margin-left:5px; margin-right:5px;">
+    <div class="column is-full" ng-repeat="faq in faqs">
+      <div class="box cursor-pointer" ng-click="showHideAnswer(faq)">
+        <span class="float-left" style="width:95%;">{{$index + 1}}. {{faq.question}}</span>
+        <span ng-if="!isDisplay(faq.id)" class="float-right"> <i class="fa fa-chevron-down"></i> </span>
+        <span ng-if="isDisplay(faq.id)" class="float-right"> <i class="fa fa-chevron-up"></i> </span>
+        <br style="clear:both;" />
+        <span id="faqanswer-{{faq.id}}"style="display:none; font-size:15px; font-style: italic;"><br />{{faq.answer}} </span>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <center>
+      <label style="margin-bottom:auto; margin-top:auto;"> <i class="fa fa-building secondary-color"></i> Vulcan Technologies </label>
+      <label style="margin-bottom:auto; margin-top:20px; margin-left:10px;"> <i class="fa fa-phone secondary-color"></i> (+91) 8904125737 </label>
+      <!-- <label style="margin-bottom:auto; margin-top:20px; margin-left:10px;"> <i class="fa fa-envelope secondary-color"></i> varun12041994@yahoo.com </label> -->
+      <br style="clear:both;">
+    </center>
+  </div>
+
+</div>

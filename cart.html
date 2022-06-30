@@ -1,0 +1,87 @@
+<head>
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+</head>
+
+<div ng-controller="cart-controller">
+  <center>
+    <label ng-if="totalCartItems != 0"> My Cart </label>
+    <label ng-if="totalCartItems == 0"> Your Cart is Empty </label>
+  </center><br />
+  <div id="cartItemsDiv" class="columns is-variable bd-klmn-columns is-3 is-multiline"
+  style="margin-left:5px; margin-right:5px;">
+    <div class="column is-3" ng-repeat="cartItem in cartItems">
+      <div class="box cursor-pointer">
+        <div class="float-left">
+          {{cartItem.name}} ({{cartItem.uom}})<br />
+          <!-- &#8377; {{item.price}}/- -->
+        </div>
+        <div class="float-right">
+          <img src="vegetable_icons/potatoes.svg" width="40px" height="40px" />
+        </div>
+        <br style="clear:both;">
+        <div class="float-left" style="display:flex;">
+          <div class="button is-info cursor-pointer" ng-click="increaseQty(cartItem)"> <i class="fa fa-plus"></i> </div>
+          <label style="margin-top:auto; margin-bottom:auto;"> &nbsp; {{cartItem.quantity}} &nbsp; </label>
+          <div class="button is-info cursor-pointer" ng-click="decreaseQty(cartItem)"> <i class="fa fa-minus"></i> </div>
+        </div>
+        <div class="float-right" style="margin-top:5px;">
+          &#8377; {{cartItem.quantity * cartItem.cost}}/-
+        </div>
+        <br style="clear:both;">
+      </div>
+    </div>
+  </div>
+  <br style="clear:both;">
+
+  <div id="userAddressesCartBox" class="user-addresses-cart" style="margin-left:5px; margin-right:5px; display:none;">
+    <center> Select your Delivery Address or <label class="cursor-pointer" ng-click="changeView('user-address')"><u>Add New</u></label></center>
+    <div class="columns is-variable bd-klmn-columns is-3 is-multiline"
+    style="margin-left:5px; margin-right:5px;">
+      <div class="column is-3" ng-repeat="address in addresses">
+        <div class="box cursor-pointer" ng-click="selectAddressForCheckout(address.addressId)">
+          <i ng-if="address.type == 'HOME'" class="fa fa-home secondary-color"></i>
+          <i ng-if="address.type == 'WORK'" class="fa fa-briefcase secondary-color"></i>
+          <i ng-if="address.type == 'OTHER'" class="fa fa-map-marker secondary-color"></i>
+          {{address.address}} <i ng-if="address.addressId == selectedAddressIdForCheckout" class="fa fa-check main-color"></i>
+          <br /><i class="fa fa-map-marker-alt secondary-color"></i>&nbsp;{{address.area}}
+        </div>
+      </div>
+    </div>
+    <br style="clear:both;">
+  </div>
+
+  <div id="deliverySlotBox" class="user-addresses-cart" style="margin-left:5px; margin-right:5px; display:none;">
+    <center> Select your Delivery Slot </center>
+    <div class="columns is-variable bd-klmn-columns is-3 is-multiline"
+    style="margin-left:5px; margin-right:5px;">
+      <div class="column is-3" ng-repeat="slot in slotDateAndTime">
+        <div class="box cursor-pointer" ng-click="selectDeliverySlot(slot)">
+          <center>
+            {{slot.fromSlotTime | date : 'EEEE'}} {{slot.fromSlotTime | date : 'mediumDate'}} <br />
+            {{slot.fromSlotTime | date : 'HH:mm'}} - {{slot.toSlotTime | date : 'HH:mm' }}&nbsp;<i ng-if="slot == selectedDeliverySlot" class="fa fa-check main-color"></i>
+          </center>
+       </div>
+      </div>
+    </div>
+    <br style="clear:both;">
+  </div>
+
+  <center>
+    Total Price : (&#8377;{{totalCost}} /-)<br />
+    <span id="deliveryFeeLabel" style="font-size:10px; font-style: italic;">(Inclusive of &#8377; {{deliveryFee}}/- Delivery Fee)</span>
+    <br />
+    <span ng-if="promocode == null && discount == 0" id="promocodeDiv" class="cursor-pointer" style="font-size:15px; font-style: italic;" ng-click="applyPromocode()"> Have Promocode? </span>
+    <span ng-if="promocode != null && discount != 0" style="font-size:15px; font-style: italic;"> Promocode {{promocode}} Applied! &#8377; {{discount}}/- Off! </span>
+  </center>
+  <br style="clear:both;">
+
+  <center>
+    <div id="selectDeliveryAddress" class="button main-color-background hover-change-color-background">
+      <label ng-if="!isAddressDisplayed && !isDeliverySlotDisplayed"class="cursor-pointer" ng-click="selectAddress()"> Next > Select Delivery Address </label>
+      <label ng-if="isAddressDisplayed" class="cursor-pointer" ng-click="selectDeliveryDates()"> Next > Select Delivery Dates </label>
+      <label ng-if="isDeliverySlotDisplayed" class="cursor-pointer" ng-click="placeOrder()"> Next > Place Order </label>
+    </div>
+  </center>
+</div>

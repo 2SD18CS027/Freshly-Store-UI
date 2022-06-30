@@ -1,0 +1,82 @@
+<head>
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+</head>
+
+<nav class="navbar" ng-controller="index-controller" style="background-color:#22d0b2">
+	<div class="navbar-start">
+
+    <!-- <div ng-click="changeView('index')" class="button navbar-item is-large is-info" style="margin-top:1px;"> <span class="icon is-large">
+			<i class="fa fa-shopping-cart"></i>
+      </span> <span style="color:white; font-family: 'Open Sans Condensed', sans-serif;">The Freshly Store</span>
+    </div> -->
+		<div class="img-wrap cursor-pointer" style="width:60px; height:60px" ng-click="changeView('index')">
+			<img src="icons_custom/sub-logo-blue.svg" style="min-width:100"/>
+		</div>
+
+  	&nbsp; <div class="navbar-item is-size-6" ng-click="changeView('index')" style="cursor:pointer;"> The Freshly Store </div>
+
+	</div>
+
+  <div ng-if="isUserLoggedIn" class="navbar-end">
+		<div class="navbar-item  is-hoverable">
+			<div class="navbar-link" style="cursor:pointer;"> {{name}} </div>
+			<div class="navbar-dropdown">
+				<div class="navbar-item" ng-click="logout()" style="cursor:pointer;"> Logout </div>
+			</div>
+		</div>
+	</div>
+  <div ng-if="!isUserLoggedIn" class="navbar-end">
+		<div class="navbar-item  is-hoverable">
+			<div class="navbar-link"> Login/Register </div>
+      <div class="navbar-dropdown">
+				<div  href="#" class="navbar-item" style="cursor:pointer;" ng-click="changeView('login')"> Login </div>
+				<hr class="navbar-divider">
+				<div class="navbar-item" style="cursor:pointer;" ng-click="changeView('login')"> Register </div>
+			</div>
+		</div>
+	</div>
+
+</nav>
+
+<div class="secondary-header columns" style="width:98%; margin: auto;">
+	<div class="column is-one-third">
+		<!-- <div ng-if="isUserLoggedIn" class="user-address" style="display:flex;" ng-click="changeView('user-address')"> -->
+		<div class="user-address" >
+			<!-- <i class="fa fa-address-card fa-2x main-color cursor-pointer hover-change-color"></i> -->
+			<!-- <label class="text-ellipsis cursor-pointer" style="margin-top:auto; margin-bottom:auto; margin-left: 5px;">{{userActiveAddress}}</label> -->
+			<i class="fas fa-map-marker-alt main-color fa-lg" style="margin-top:5px;"></i>
+			<select class="dropdown" ng-model="selectedAreaName" ng-options="area for area in serviceableAreas" ng-change="updateDefaultAddress()"></select>
+		  <span class="msg"></span>
+      <span style="display:block; font-size:10px; font-style: italic; margin-left:20px;">(Serviceable Areas)</span>
+
+		</div>
+	</div>
+
+	<div class="column user-options">
+		<div class="other-options header-icons" style="display:flex;">
+
+			<i class="fa fa-question-circle fa-2x main-color cursor-pointer hover-change-color" ng-click="changeView('help')"></i>
+			<label class="icon-labels cursor-pointer" style="margin-top:auto; margin-bottom:auto; margin-left: 5px;" ng-click="changeView('help')">HELP </label>
+
+			<i ng-if="isUserLoggedIn" class="fa fa-user fa-2x main-color cursor-pointer hover-change-color" style="margin-left:20px;" ng-click="changeView('account')"></i>
+			<label ng-if="isUserLoggedIn" class="icon-labels cursor-pointer" style="margin-top:auto; margin-bottom:auto; margin-left: 5px;" ng-click="changeView('account')">ACCOUNT </label>
+			<i ng-if="!isUserLoggedIn" class="fa fa-user fa-2x main-color blur" style="margin-left:20px;"></i>
+			<label ng-if="!isUserLoggedIn" class="icon-labels blur" style="margin-top:auto; margin-bottom:auto; margin-left: 5px;">ACCOUNT </label>
+
+			<!-- <i class="fa fa-shopping-cart fa-2x main-color cursor-pointer hover-change-color" style="margin-left:20px;" ng-click="changeView('cart')"></i>
+			<label class="icon-labels cursor-pointer" style="margin-top:auto; margin-bottom:auto; margin-left: 5px;" ng-click="changeView('cart')">CART</label>
+			<label style="margin-top:auto; margin-bottom:auto;"> &nbsp; ({{totalCartItems}})</label> -->
+		</div>
+	</div>
+</div>
+
+<a class="float" ng-click="changeView('cart')">
+<i class="fa fa-shopping-cart fa-lg cursor-pointer my-float"></i> {{totalCartItems}}
+</a>
+
+<!-- <div style="display:flex; align-items: center; justify-content: center;">
+	Select Your City : <select ng-model="selectedCityName" ng-options="city for city in serviceableCities"></select>
+	Select Your Area : <select ng-model="selectedAreaName" ng-options="area for area in serviceableAreas"></select>
+</div> -->

@@ -1,0 +1,22 @@
+<head>
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+</head>
+
+<center> Register </center>
+<div class="box column is-one-third" style="margin:0 auto !important;" ng-controller="user-controller">
+  <input id="registerName" type="text" placeholder="Name..." style="margin-bottom:10px; width:100%; height:30px;"/>
+  <input id="registerMobileNumber" type="text" placeholder="Mobile Number..." style="margin-bottom:10px; width:100%; height:30px;"/>
+  <input id="registerPassword" type="password" placeholder="Password..." style="margin-bottom:10px; width:100%; height:30px;" />
+  <input id="registerEmail" type="email" placeholder="Email ID..." style="margin-bottom:10px; width:100%; height:30px;" />
+
+  <div class="button main-color-background" style="height:28px; width:100%;" ng-click="register()">
+    Register
+    <i id="registerSpinner" style="display:none;" class="fa fa-spinner fa-pulse fa-fw"></i>
+  </div>
+  <center>or</center>
+  <div class="button secondary-color-background" style="height:28px; width:100%;" ng-click="changeView('login')">
+    Existing User? Click to Login
+  </div>
+</div>

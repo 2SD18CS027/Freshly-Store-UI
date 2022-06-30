@@ -1,0 +1,96 @@
+<head>
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+</head>
+
+<div>
+  <center> Account Details </center>
+  <div class="column is-one-third" style="margin:0 auto !important;">
+    <!-- <input id="loginMobileNumber" type="text" placeholder="Mobile Number..." style="margin-bottom:10px; width:100%; height:30px;"/>
+    <input id="loginPassword" type="password" placeholder="Password..." style="margin-bottom:10px; width:100%; height:30px;" />
+    <div class="button is-info" style="height:28px; width:100%;" ng-click="login()"> Login
+    <i id="loginSpinner" style="display:none;" class="fa fa-spinner fa-pulse fa-fw"></i> </div> -->
+    <div class="box">
+
+      <label id="editName" class="float-left" style="margin-bottom:auto; margin-top:auto;"> <i class="fa fa-user"></i> {{name}} </label>
+      <i class="fa fa-pen float-right cursor-pointer hover-change-color main-color" style="margin-top:5px;" ng-click="editUserDetails('name', name)"></i>
+
+      <br style="clear:both;">
+
+      <label id="editMobileNumber" class="float-left" style="margin-bottom:auto; margin-top:20px;"> <i class="fa fa-phone"></i> {{mobileNumber}} </label>
+      <i class="fa fa-pen float-right cursor-pointer hover-change-color main-color" style="margin-top:25px;"></i>
+      <br style="clear:both;">
+
+      <label id="editEmail" class="float-left" style="margin-bottom:auto; margin-top:20px;"> <i class="fa fa-envelope"></i> {{emailId}} </label>
+      <i class="fa fa-pen float-right cursor-pointer hover-change-color main-color" style="margin-top:25px;" ng-click="editUserDetails('email', emailId)"></i>
+      <br style="clear:both;">
+
+      <br style="clear:both;">
+      <center>
+        <span class="tag cursor-pointer" style="color:#209cee" ng-click="changeView('user-address');"> <i class="fa fa-map-marker-alt"></i> &nbsp; Your Addresses</span>
+      </center>
+      <br style="clear:both;">
+    </div>
+  </div>
+
+  <br style="clear:both;">
+
+  <center> Your Orders </center>
+  <div class="columns" style="margin-left:2px; margin-right:2px;">
+    <div class="column is-variable bd-klmn-columns is-4 is-multiline" ng-repeat="order in orders">
+      <div class="box cursor-pointer">
+        <div id="main-order-tab-{{order.orderId}}" ng-click="displayOrderItems(order.orderId)">
+          <label class="float-left">{{order.createdTime | date: 'dd/MM/yyyy'}}</label>
+          <label class="float-right">&#8377; {{order.totalPrice}} /- </label>
+          <hr style="clear:both;"/>
+          {{order.address}}<br />
+          <center><b>{{getOrderStatus(order.orderStatus)}}</b> &nbsp; <i class="fa fa-check main-color"></i></center>
+          <hr style="clear:both;"/>
+          <label class="float-left"><b>Total Items : {{order.orderItems.length}}</b></label>
+          <i class="fa fa-chevron-down float-right hover-change-color"></i>
+          <br style="clear:both;"/>
+        </div>
+        <div id="sub-order-tab-{{order.orderId}}" style="display:none;" ng-click="hideOrderItems(order.orderId)">
+          <label class="float-left"><b>Total Items : {{order.orderItems.length}}</b></label>
+          <i class="fa fa-chevron-up float-right hover-change-color"></i>
+          <hr style="clear:both;"/>
+          <center><table style="border: 1px solid grey; border-collapse: collapse; padding: 5px 5px 5px 5px;">
+            <tr style="border: 1px solid grey; border-collapse: collapse; padding: 5px 5px 5px 5px;">
+              <th style="border: 1px solid grey; border-collapse: collapse; padding: 5px 5px 5px 5px;">Name</th>
+              <th style="border: 1px solid grey; border-collapse: collapse; padding: 5px 5px 5px 5px;">Qty</th>
+              <th style="border: 1px solid grey; border-collapse: collapse; padding: 5px 5px 5px 5px;">Price</th>
+            </tr>
+            <tr ng-repeat="orderItem in order.orderItems" style="border: 1px solid grey; border-collapse: collapse; padding: 5px 5px 5px 5px;">
+              <td style="border: 1px solid grey; border-collapse: collapse; padding: 5px 5px 5px 5px;">{{orderItem.name}}</td>
+              <td style="border: 1px solid grey; border-collapse: collapse; padding: 5px 5px 5px 5px;">{{orderItem.quantity}}</td>
+              <td style="border: 1px solid grey; border-collapse: collapse; padding: 5px 5px 5px 5px;">&#8377;{{orderItem.price}} /-</td>
+            </tr>
+          </table></center>
+          <center>
+            <span class="tag is-info" style="margin-top:10px;" ng-click="emailInvoice(order, $event)">
+              Email Invoice &nbsp; <i class="fa fa-receipt"></i>
+            </span>
+          </center>
+        </div>
+      </div>
+    </div>
+  </div>
+  <center>
+    <div ng-if="offset != 0" style="display:inline; padding-top:5px; padding-bottom:5px;" class="tag main-color cursor-pointer is-info" ng-click="prevOrders()">
+      <i class="fa fa-angle-left fa-lg"></i> &nbsp; Prev
+    </div>
+    <div ng-if="offset == 0" style="display:inline; padding-top:5px; padding-bottom:5px;" class="tag main-color">
+      <i class="fa fa-angle-left fa-lg"></i> &nbsp; Prev
+    </div>
+    &nbsp; &nbsp;
+    <div ng-if="orderAreMoreItemsAvailable" style="display:inline; padding-top:5px; padding-bottom:5px;" class="tag main-color cursor-pointer is-info" ng-click="nextOrders()">
+      Next &nbsp;
+      <i class="fa fa-angle-right fa-lg"></i>
+    </div>
+    <div ng-if="!orderAreMoreItemsAvailable" style="display:inline; padding-top:5px; padding-bottom:5px;" class="tag main-color">
+      Next &nbsp;
+      <i class="fa fa-angle-right fa-lg"></i>
+    </div>
+  </center>
+</div>

@@ -1,0 +1,60 @@
+<head>
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+</head>
+
+<div ng-controller="item-controller">
+  <!-- <div style="display:flex; align-items: center; justify-content: center;">
+    Select Your City : <select ng-model="selectedCityName" ng-options="city for city in serviceableCities"></select>
+    Select Your Area : <select ng-model="selectedAreaName" ng-options="area for area in serviceableAreas"></select>
+  </div> -->
+  <center>
+    <div style="display: inline-block; padding-left:5px; padding-right:5px; background-color:#f87562; color:white;">Register & receive 20% off coupon in your email inbox</div>
+  </center>
+  <div style="display:flex; align-items: center; justify-content: center;">
+    <div class="tabs">
+      <ul>
+        <li id="item-category-{{category}}" ng-repeat="category in allItemDetails.categories"
+          ng-click="changeCategory(category)">
+          <a ng-if="activeCategory == category"><label class="secondary-color">{{category}}</label> &nbsp; </a>
+          <a ng-if="activeCategory != category">{{category}} &nbsp; </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <br />
+
+  <center>
+    <input id="searchInput" type="text" placeholder="Search..." autofocus ng-keyup="searchItems()" style="height:30px; width:150px;">
+  </center>
+  <br />
+  <div class="columns is-variable bd-klmn-columns is-3 is-multiline"
+  style="margin-left:5px; margin-right:5px;">
+    <div class="column is-3" ng-repeat="item in itemsToDisplay">
+      <div class="box">
+        <div class="float-left">
+          {{item.name}}<br />
+          &#8377;{{item.price}}/- per {{item.uom}}
+        </div>
+        <div class="float-right">
+          <img src="{{item.imageUrl}}" width="40px" height="40px" />
+        </div>
+        <br style="clear:both;">
+        <br style="clear:both;">
+        <center>
+          <div ng-if="item.cartQty == 0" class="button cursor-pointer secondary-color-background" style="width:80%; margin-left:5%;"
+          ng-click="addToCart(item)">
+            <label class="cursor-pointer">ADD TO CART</label>
+          </div>
+        </center>
+        <div ng-if="item.cartQty != 0" style="display:flex; align-items: center; justify-content: center;">
+          <div class="button is-info cursor-pointer" ng-click="increaseQty(item)"> <i class="fa fa-plus"></i> </div>
+          <label style="margin-top:auto; margin-bottom:auto;"> &nbsp; {{item.cartQty}} &nbsp; </label>
+          <div class="button is-info cursor-pointer" ng-click="decreaseQty(item)"> <i class="fa fa-minus"></i> </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

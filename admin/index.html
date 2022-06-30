@@ -1,0 +1,109 @@
+<html ng-app="the-freshly-store-admin">
+  <link rel="shortcut icon" type="image/x-icon" href="../main-logo.ico"/>
+  <head>
+    <title>The Freshly Store</title>
+
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0//angular-route.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.1/css/bulma.min.css">
+    <link rel="stylesheet" href="../stylesheets/index.css">
+
+    <!-- <base href="/admin"/> -->
+  </head>
+
+  <body ng-controller="admin-controller" style="margin-left:10px; margin-right:10px;">
+    <div id="loader" class="spinner" style="display:none;">
+      <img src="../3120432.gif">
+    </div>
+    <center>
+      <div style="display:flex; align-items: center; justify-content: center;">
+        <div class="tabs">
+          <ul>
+            <li class="cursor-pointer" ng-if="activeTab == 'report'" id="report"><a><label class="secondary-color">Today's Report</label> &nbsp; </a></li>
+            <li class="cursor-pointer" ng-if="activeTab != 'report'" id="report"><a>Today's Report &nbsp; </a></li>
+            <li class="cursor-pointer" ng-if="activeTab == 'items'" id="items"><a><label class="secondary-color">Items</label> &nbsp; </a></li>
+            <li class="cursor-pointer" ng-if="activeTab != 'items'" id="items" ng-click="changeView('items')"><a>Items &nbsp; </a></li>
+          </ul>
+        </div>
+      </div>
+    </center>
+    <div ng-view></div>
+    <center>
+      <div ng-if="orders.length == 0">
+        Sorry! No Orders Today
+      </div>
+    </center>
+    <div ng-if="orders.length > 0">
+      Items to Buy
+      <table style="border: 1px solid grey; border-collapse: collapse; padding: 5px 5px 5px 5px;">
+        <tr style="border: 1px solid grey; border-collapse: collapse; padding: 5px 5px 5px 5px;">
+          <th style="border: 1px solid grey; border-collapse: collapse; padding: 5px 5px 5px 5px;">Name</th>
+          <th style="border: 1px solid grey; border-collapse: collapse; padding: 5px 5px 5px 5px;">Qty</th>
+          <th style="border: 1px solid grey; border-collapse: collapse; padding: 5px 5px 5px 5px;">UOM</th>
+        </tr>
+        <tr ng-repeat="item in itemsToBuy" style="border: 1px solid grey; border-collapse: collapse; padding: 5px 5px 5px 5px;">
+          <td style="border: 1px solid grey; border-collapse: collapse; padding: 5px 5px 5px 5px;">{{item.name}}</td>
+          <td style="border: 1px solid grey; border-collapse: collapse; padding: 5px 5px 5px 5px;">{{item.quantity}}</td>
+          <td style="border: 1px solid grey; border-collapse: collapse; padding: 5px 5px 5px 5px;">{{item.uom}}</td>
+        </tr>
+      </table>
+
+      <br />
+      <center><b>Orders</b></center>
+      <br />
+      <div class="columns is-variable bd-klmn-columns is-3 is-multiline"
+      style="margin-left:5px; margin-right:5px;">
+        <div class="column is-3" ng-repeat="order in orders">
+          <div class="box">
+            <center> <b>Order No : {{order.customerOrderId}}</b> </center>
+            Customer Name : {{order.name}}<br />
+            Mobile Number : {{order.mobileNumber}}<br />
+            Address : {{order.address}}<br />
+            Area : {{order.area}}<br />
+            <table style="border: 1px solid grey; border-collapse: collapse; padding: 5px 5px 5px 5px;">
+              <tr style="border: 1px solid grey; border-collapse: collapse; padding: 5px 5px 5px 5px;">
+                <th style="border: 1px solid grey; border-collapse: collapse; padding: 5px 5px 5px 5px;">Name</th>
+                <th style="border: 1px solid grey; border-collapse: collapse; padding: 5px 5px 5px 5px;">Qty</th>
+                <th style="border: 1px solid grey; border-collapse: collapse; padding: 5px 5px 5px 5px;">Uom</th>
+                <th style="border: 1px solid grey; border-collapse: collapse; padding: 5px 5px 5px 5px;">Price</th>
+              </tr>
+              <tr ng-repeat="item in order.items" style="border: 1px solid grey; border-collapse: collapse; padding: 5px 5px 5px 5px;">
+                <td style="border: 1px solid grey; border-collapse: collapse; padding: 5px 5px 5px 5px;">{{item.name}}</td>
+                <td style="border: 1px solid grey; border-collapse: collapse; padding: 5px 5px 5px 5px;">{{item.quantity}}</td>
+                <td style="border: 1px solid grey; border-collapse: collapse; padding: 5px 5px 5px 5px;">{{item.uom}}</td>
+                <td style="border: 1px solid grey; border-collapse: collapse; padding: 5px 5px 5px 5px;">&#8377;{{item.price}} /-</td>
+              </tr>
+            </table><br />
+            <center>
+              <div ng-if="order.status == 1" class="button secondary-color-background" ng-click="changeOrderStatus(order, 2)"> PROCESSED AND PACKED &nbsp; <i class="fa fa-check-circle"></i> </div>
+              <div ng-if="order.status == 2" class="button secondary-color-background" ng-click="changeOrderStatus(order, 3)"> ON THE WAY &nbsp; <i class="fa fa-check-circle"></i> </div>
+            </center>
+          </div>
+        </div>
+      <div class="columns is-variable bd-klmn-columns is-3 is-multiline"
+      style="margin-left:5px; margin-right:5px;">
+    </div>
+  </body>
+</html>
+
+<script type="text/javascript" src="../js/RestURLs.js"></script>
+<script type="text/javascript" src="js/app.js"></script>
+<script type="text/javascript" src="js/service.js"></script>
+<script type="text/javascript" src="js/admin-controller.js"></script>
+<script type="text/javascript" src="js/items-controller.js"></script>
+<script type="text/javascript" src="js/login-controller.js"></script>
